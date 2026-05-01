@@ -22,21 +22,15 @@ export default defineConfig({
         index: path.resolve(root, "index.html"),
         events: path.resolve(root, "events.html"),
         event: path.resolve(root, "event.html"),
-        campusReps: path.resolve(root, "campus-reps.html"),
-        sponsors: path.resolve(root, "sponsors.html"),
       },
     },
   },
   server: {
     port,
-    strictPort: true,
     host: "0.0.0.0",
-    allowedHosts: true,
   },
   preview: {
     port,
-    strictPort: true,
     host: "0.0.0.0",
-    allowedHosts: true,
   },
 });

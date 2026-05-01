@@ -1,7 +1,6 @@
 import { initShell, setupFadeIns } from "./shared.js";
 import {
-  TARGET_DATE, HISTORY, CORE_COUNCIL, EXECUTIVE_COUNCIL, CLUB_HEADS,
-  CONTACTS, ARCHITECT,
+  TARGET_DATE, HISTORY, CONTACTS, ARCHITECT,
 } from "./data.js";
 
 // ---- Countdown ----
@@ -113,56 +112,6 @@ function renderHistory() {
   start();
 }
 
-// ---- Operators ----
-const PEOPLE = { core: CORE_COUNCIL, exec: EXECUTIVE_COUNCIL, clubs: CLUB_HEADS };
-
-function personCard(p) {
-  return `
-    <div class="op-card fade-in">
-      <div class="op-photo">
-        <img src="${p.photo}" alt="${p.name}" loading="lazy" />
-      </div>
-      <div class="op-info">
-        <div class="op-name">${p.name}</div>
-        <div class="op-position">${p.position}</div>
-      </div>
-    </div>
-  `;
-}
-
-function renderOperators(tab) {
-  const grid = document.getElementById("operatorsGrid");
-  if (!grid) return;
-  if (tab === "core") {
-    // Two rows: row1 = President + Vice President; row2 = AVPs
-    const list = PEOPLE.core;
-    const row1 = list.slice(0, 2);
-    const row2 = list.slice(2);
-    grid.className = "operators-grid core-stack";
-    grid.innerHTML = `
-      <div class="core-row core-row-1">${row1.map(personCard).join("")}</div>
-      <div class="core-row core-row-2">${row2.map(personCard).join("")}</div>
-    `;
-  } else {
-    grid.className = "operators-grid";
-    grid.innerHTML = PEOPLE[tab].map(personCard).join("");
-  }
-  setupFadeIns(".op-card");
-}
-
-function setupOperatorsTabs() {
-  const tabs = document.getElementById("operatorsTabs");
-  if (!tabs) return;
-  tabs.addEventListener("click", (e) => {
-    const btn = e.target.closest(".op-tab");
-    if (!btn) return;
-    tabs.querySelectorAll(".op-tab").forEach((t) => t.classList.remove("active"));
-    btn.classList.add("active");
-    renderOperators(btn.dataset.tab);
-  });
-  renderOperators("core");
-}
-
 // ---- Pick Your Lane links ----
 function setupGridLinks() {
   const broch = document.getElementById("brochureLink");
@@ -191,7 +140,6 @@ initShell({ withLoader: true }).then(() => {
   tickCountdown();
   setInterval(tickCountdown, 1000);
   renderHistory();
-  setupOperatorsTabs();
   setupGridLinks();
   setupFadeIns();
 });

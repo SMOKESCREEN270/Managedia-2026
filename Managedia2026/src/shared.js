@@ -6,8 +6,6 @@ import { CONTACTS } from "./data.js";
 const PAGES = [
   { href: "/",            label: "Takeover",   match: ["/", "/index.html"] },
   { href: "/events.html", label: "Events",     match: ["/events", "/events.html", "/event", "/event.html"] },
-  { href: "/campus-reps.html", label: "Campus Reps", match: ["/campus-reps", "/campus-reps.html"] },
-  { href: "/sponsors.html",label: "Sponsors",  match: ["/sponsors", "/sponsors.html"] },
 ];
 
 function isActive(page) {
@@ -49,7 +47,6 @@ function buildFooter() {
           <div class="footer-socials">
             <a href="${CONTACTS.instagram}" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             <a href="${CONTACTS.youtube}" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-            <a href="${CONTACTS.whatsappLink}" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
             <a href="mailto:${CONTACTS.email}" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
           </div>
         </div>
@@ -58,15 +55,12 @@ function buildFooter() {
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/events.html">Events</a></li>
-            <li><a href="/campus-reps.html">Campus Rep</a></li>
-            <li><a href="/sponsors.html">Sponsors</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Connect</h4>
           <ul>
             <li><a href="mailto:${CONTACTS.email}">${CONTACTS.email}</a></li>
-            <li><a href="${CONTACTS.whatsappLink}">${CONTACTS.whatsapp}</a></li>
             <li><a href="${CONTACTS.instagram}">@takeover.ilead</a></li>
           </ul>
         </div>
@@ -74,10 +68,18 @@ function buildFooter() {
           <h4>Resources</h4>
           <ul>
             <li><a href="${CONTACTS.brochure}" download>Brochure</a></li>
-            <li><a href="#">Code of Conduct</a></li>
-            <li><a href="#">Terms</a></li>
           </ul>
         </div>
+      </div>
+      <div class="footer-huge-text">
+        <svg viewBox="0 0 1050 180" width="100%" height="auto" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <pattern id="dotPattern" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+              <circle cx="2" cy="2" r="1.5" fill="rgba(255, 255, 255, 0.15)" />
+            </pattern>
+          </defs>
+          <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Orbitron, sans-serif" font-weight="900" font-size="160" letter-spacing="15" fill="url(#dotPattern)">TAKEOVER</text>
+        </svg>
       </div>
       <div class="footer-bottom">
         &copy; 2026 Institute of Leadership, Entrepreneurship and Development. All rights reserved.
@@ -95,14 +97,17 @@ function buildLoader() {
   div.className = "loader";
   div.id = "siteLoader";
   const isMobile = window.matchMedia("(max-width: 768px)").matches;
-  const loaderSrc = isMobile ? "/takeover_loader_mobile.mp4" : "/takeover_loader.mp4";
+  const loaderSrc = isMobile ? "/mobile_loader_new.mp4" : "/Desktop_Loadervideo.mp4";
   div.innerHTML = `
-    <video class="loader-video" playsinline preload="auto" id="loaderVideo">
+    <video class="loader-video" playsinline preload="auto" id="loaderVideo" style="pointer-events: none;">
       <source src="${loaderSrc}" type="video/mp4" />
     </video>
     <div class="loader-overlay"></div>
+    <div class="loader-content" id="loaderPlayOverlay" style="display: none; z-index: 1000;">
+      <button class="btn" id="forcePlayBtn" style="font-size: 1.2rem; padding: 15px 30px;"><i class="fa-solid fa-play"></i> Enter TAKEOVER</button>
+    </div>
     <div class="loader-content">
-      <div class="sound-options" id="loaderSoundOptions">
+      <div class="sound-options hidden" id="loaderSoundOptions">
         <button class="btn" data-sound="on"><i class="fa-solid fa-volume-high"></i> Continue with Music</button>
         <button class="btn" data-sound="off"><i class="fa-solid fa-volume-xmark"></i> Continue without Music</button>
       </div>
@@ -118,18 +123,32 @@ function setupAudio(playOnLoad) {
     audio.id = "siteAudio";
     audio.loop = true;
     audio.preload = "none";
-    audio.innerHTML = `<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />`;
+    audio.innerHTML = `<source src="/welcome-to-the-party.mp3" type="audio/mpeg" />`;
     document.body.appendChild(audio);
   }
   audio.volume = 0.4;
+  
   const btn = document.getElementById("soundToggle");
   const setIcon = (playing) => {
     if (!btn) return;
     btn.querySelector("i").className = `fa-solid ${playing ? "fa-volume-high" : "fa-volume-xmark"}`;
   };
-  if (playOnLoad) {
-    audio.play().then(() => setIcon(true)).catch(() => setIcon(false));
+
+  audio.addEventListener("play", () => sessionStorage.setItem("musicPlaying", "1"));
+  audio.addEventListener("pause", () => sessionStorage.setItem("musicPlaying", "0"));
+
+  const shouldPlay = playOnLoad || sessionStorage.getItem("musicPlaying") === "1";
+
+  if (shouldPlay) {
+    audio.play().then(() => setIcon(true)).catch(() => {
+      // Autoplay might be blocked on new page load despite interaction on previous page
+      sessionStorage.setItem("musicPlaying", "0");
+      setIcon(false);
+    });
+  } else {
+    setIcon(false);
   }
+
   btn?.addEventListener("click", () => {
     if (audio.paused) {
       audio.play().then(() => setIcon(true)).catch(() => setIcon(false));
@@ -226,19 +245,22 @@ export function initShell({ withLoader = false } = {}) {
       };
       if (video) {
         video.addEventListener("ended", revealOptions, { once: true });
-        // Safety fallback in case the video errors / can't play.
         video.addEventListener("error", revealOptions, { once: true });
-        // If the video metadata never loads, reveal after 20s anyway.
-        setTimeout(() => { if (opts && opts.classList.contains("hidden")) revealOptions(); }, 20000);
-
-        // Try to autoplay UNMUTED. Browsers may block this without prior user
-        // interaction — in that case, fall back to muted autoplay so the
-        // animation still plays through to its `ended` event.
+        
         video.muted = false;
-        const tryPlay = () => video.play();
-        tryPlay().catch(() => {
-          video.muted = true;
-          video.play().catch(() => { /* ignore — `error` handler reveals options */ });
+        video.play().catch((err) => {
+          console.warn("Autoplay with sound blocked by browser policy. User interaction required.", err);
+          const playOverlay = loader.querySelector("#loaderPlayOverlay");
+          const forceBtn = loader.querySelector("#forcePlayBtn");
+          if (playOverlay && forceBtn) {
+            playOverlay.style.display = "flex";
+            forceBtn.addEventListener("click", () => {
+              playOverlay.style.display = "none";
+              video.play();
+            }, { once: true });
+          } else {
+            revealOptions();
+          }
         });
       } else {
         revealOptions();

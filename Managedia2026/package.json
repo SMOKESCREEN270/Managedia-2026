@@ -1,9 +1,8 @@
 {
-  "name": "@workspace/takeover-2026",
+  "name": "takeover-2026",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "TAKEOVER 2026 — iLEAD college fest static site (HTML / CSS / JS, bundled with Vite)",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
