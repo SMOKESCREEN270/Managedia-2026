@@ -77,7 +77,7 @@ function buildEventsGrid() {
 }
 
 // ─── Day tabs ─────────────────────────────────────────────────────────────────
-function buildDayTabs() {
+function renderDayTabs() {
   const tabs = document.getElementById('dayTabs');
   if (!tabs) return;
 
@@ -94,22 +94,32 @@ function buildDayTabs() {
       </button>
     `;
   }).join('');
+}
+
+function buildDayTabs() {
+  renderDayTabs();
+  const tabs = document.getElementById('dayTabs');
+  if (!tabs) return;
+
+  // Attach listener only once via a flag on the element
+  if (tabs._listenerAttached) return;
+  tabs._listenerAttached = true;
 
   tabs.addEventListener('click', e => {
     const card = e.target.closest('.day-card');
     if (!card) return;
     activeDay = card.dataset.day;
-    buildDayTabs();
+    renderDayTabs();      // only re-renders HTML, does NOT re-attach listener
     buildTimetable();
   });
 }
 
 // ─── Timetable ────────────────────────────────────────────────────────────────
 function parseTime(str) {
-  if (!str) return { mins: -1, label: '', isAllDay: false };
+  if (!str) return { mins: -1, label: '', isAllDay: true };
   if (/all day/i.test(str)) return { mins: -1, label: 'All Day', isAllDay: true };
   const m = str.match(/(\d{1,2}):(\d{2})\s*(AM|PM)?/i);
-  if (!m) return { mins: -1, label: str, isAllDay: false };
+  if (!m) return { mins: -1, label: str, isAllDay: true }; // unrecognised → treat as all-day
   let h = parseInt(m[1], 10);
   const min = parseInt(m[2], 10);
   const ampm = (m[3] || '').toUpperCase();

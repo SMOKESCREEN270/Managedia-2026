@@ -1,0 +1,3 @@
+# Cloudflare Pages redirects
+/events  /events.html  301
+/event   /event.html   301
