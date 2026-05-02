@@ -81,7 +81,7 @@ export const NAV_LINKS = [
 const FORM_SPORTS   = 'https://forms.gle/bN8UHMZXYEJAxMBc6';
 const FORM_CULTURE  = 'https://forms.gle/DQa5Tr1k6SgWdp8A9';
 const FORM_THEATRE  = 'https://forms.gle/DQa5Tr1k6SgWdp8A9';
-const FORM_GENERAL  = 'https://forms.gle/VAZ7vJsiVVpeEGdP9';
+const FORM_GENERAL  = 'https://docs.google.com/forms/d/e/1FAIpQLSdyR4dPSMQiqBrT9CSr_9Dcbw061hcesn87AaWoZuvv8Lv7ow/viewform';
 
 const EVENT_LINKS = {
   cricket:               { formUrl: FORM_SPORTS },
@@ -106,6 +106,51 @@ const EVENT_LINKS = {
   'curtains-and-consequences': { formUrl: FORM_THEATRE },
   'mic-pe-mayhem':       { formUrl: FORM_THEATRE },
   'recreate-ya-regret':  { formUrl: FORM_THEATRE },
+  'mega-cosplay':        { formUrl: FORM_GENERAL },
+  'art-installation':    { formUrl: FORM_GENERAL },
+  'digital-art':         { formUrl: FORM_GENERAL },
+  'makeover-challenge':  { formUrl: FORM_GENERAL },
+  'face-painting':       { formUrl: FORM_GENERAL },
+  'brand-roulette':      { formUrl: FORM_GENERAL },
+  'the-panic-room':      { formUrl: FORM_GENERAL },
+  'crisis-capital':      { formUrl: FORM_GENERAL },
+  'miles-and-minds':     { formUrl: FORM_GENERAL },
+  'ideathon':            { formUrl: FORM_GENERAL },
+  'raise-it-up':         { formUrl: FORM_GENERAL },
+  'domin8':              { formUrl: FORM_GENERAL },
+  'brandstorm':          { formUrl: FORM_GENERAL },
+  'podwars':             { formUrl: FORM_GENERAL },
+  'lights-camera-quiz':  { formUrl: FORM_GENERAL },
+  'viralverse':          { formUrl: FORM_GENERAL },
+  'vibe-check':          { formUrl: FORM_GENERAL },
+  'adfusion':            { formUrl: FORM_GENERAL },
+  'devils-advocate':     { formUrl: FORM_GENERAL },
+  'inkxpress':           { formUrl: FORM_GENERAL },
+  'endgame':             { formUrl: FORM_GENERAL },
+  'whiplash':            { formUrl: FORM_GENERAL },
+  'between-realms':      { formUrl: FORM_GENERAL },
+  'volte-face':          { formUrl: FORM_GENERAL },
+  'abstract-photo-hunt': { formUrl: FORM_GENERAL },
+  'one-frame-one-truth': { formUrl: FORM_GENERAL },
+  'photojournalism':     { formUrl: FORM_GENERAL },
+  'photo-relay':         { formUrl: FORM_GENERAL },
+  'reel-making':         { formUrl: FORM_GENERAL },
+  'one-minute-short-film': { formUrl: FORM_GENERAL },
+  'adverse':             { formUrl: FORM_GENERAL },
+  'eco-artistry':        { formUrl: FORM_GENERAL },
+  'non-fire-cooking':    { formUrl: FORM_GENERAL },
+  'social-awareness-ad': { formUrl: FORM_GENERAL },
+  '60-seconds-spark':    { formUrl: FORM_GENERAL },
+  'mime-for-a-cause':    { formUrl: FORM_GENERAL },
+  'promptbattle-royale': { formUrl: FORM_GENERAL },
+  'quiz-carnage':        { formUrl: FORM_GENERAL },
+  'webwiz-ai':           { formUrl: FORM_GENERAL },
+  'code-blackout':       { formUrl: FORM_GENERAL },
+  'bgmi':                { formUrl: FORM_GENERAL },
+  'valorant':            { formUrl: FORM_GENERAL },
+  'mortal-kombat-1':     { formUrl: FORM_GENERAL },
+  'e-football':          { formUrl: FORM_GENERAL },
+  'fc26-pc':             { formUrl: FORM_GENERAL },
 };
 
 // ─── Events ──────────────────────────────────────────────────────────────────

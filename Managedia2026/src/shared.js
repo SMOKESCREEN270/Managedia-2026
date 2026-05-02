@@ -50,7 +50,6 @@ function createFooter() {
           <p>Where the stage isn't given. It's claimed. The annual fest of iLEAD — Institute of Leadership, Entrepreneurship and Development.</p>
           <div class="footer-socials">
             <a href="${SOCIAL.instagram}" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="${SOCIAL.youtube}" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
             <a href="mailto:${SOCIAL.email}" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
           </div>
         </div>
