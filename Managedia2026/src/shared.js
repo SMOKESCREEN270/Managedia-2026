@@ -58,7 +58,7 @@ function createFooter() {
           <h4>Explore</h4>
           <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/events.html">Events</a></li>
+            <li><a href="/events">Events</a></li>
           </ul>
         </div>
         <div class="footer-col">
