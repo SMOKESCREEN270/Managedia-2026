@@ -28,18 +28,18 @@ export const ARCHITECT = {
 
 // ─── Domains ─────────────────────────────────────────────────────────────────
 export const DOMAINS = [
-  { id: 'entrepreneurship', name: 'MGMT & ENT',   icon: 'fa-lightbulb',        color: 'var(--col-entrepreneurship)' },
-  { id: 'literary',         name: 'LITERARY',      icon: 'fa-book',             color: 'var(--col-literary)' },
-  { id: 'photography',      name: 'PHOTOGRAPHY',   icon: 'fa-camera',           color: 'var(--col-photography)' },
-  { id: 'sports',           name: 'SPORTS',        icon: 'fa-volleyball',       color: 'var(--col-sports)' },
-  { id: 'tech',             name: 'TECH',          icon: 'fa-laptop-code',      color: 'var(--col-tech)' },
-  { id: 'theatre',          name: 'THEATRE',       icon: 'fa-face-laugh-beam',  color: 'var(--col-theatre)' },
-  { id: 'culture',          name: 'CULTURAL',      icon: 'fa-masks-theater',    color: 'var(--col-culture)' },
-  { id: 'esports',          name: 'E-SPORTS',      icon: 'fa-gamepad',          color: 'var(--col-esports)' },
-  { id: 'film',             name: 'FILM MAKING',   icon: 'fa-clapperboard',     color: 'var(--col-film)' },
-  { id: 'nss',              name: 'NSS',           icon: 'fa-hand-holding-heart', color: 'var(--col-nss)' },
-  { id: 'art-design',       name: 'ART & DESIGN',  icon: 'fa-palette',          color: 'var(--col-art-design)' },
-  { id: 'media',            name: 'MEDIA',         icon: 'fa-microphone',       color: 'var(--col-media)' },
+  { id: 'art-design',       name: 'ART & DESIGN',  icon: 'fa-palette',          color: 'var(--col-art-design)', pocs: [{ name: 'Suranjana Sen', phone: '8902431861' }, { name: 'Koushani Adak', phone: '9230858228' }] },
+  { id: 'culture',          name: 'CULTURAL',      icon: 'fa-masks-theater',    color: 'var(--col-culture)', pocs: [{ name: 'Bhargabi Das', phone: '9831173664' }, { name: 'Zunaira Mehek', phone: '7003189474' }] },
+  { id: 'esports',          name: 'E-SPORTS',      icon: 'fa-gamepad',          color: 'var(--col-esports)', pocs: [{ name: 'Sutap Sinharay', phone: '8240539498' }, { name: 'Aneek Roy', phone: '8240325542' }] },
+  { id: 'film',             name: 'FILM MAKING',   icon: 'fa-clapperboard',     color: 'var(--col-film)', pocs: [{ name: 'Tanisa Saha', phone: '9609800991' }, { name: 'Ayushman Bag', phone: '6291037683' }, { name: 'Namrta Gupta', phone: '8017534740' }] },
+  { id: 'literary',         name: 'LITERARY',      icon: 'fa-book',             color: 'var(--col-literary)', pocs: [{ name: 'Barsharani Mahapatra', phone: '8013668664' }] },
+  { id: 'media',            name: 'MEDIA',         icon: 'fa-microphone',       color: 'var(--col-media)', pocs: [{ name: 'Parijat Biswas', phone: '7044991888' }, { name: 'Rounik Gon', phone: '8336095288' }] },
+  { id: 'entrepreneurship', name: 'MGMT & ENT',    icon: 'fa-lightbulb',        color: 'var(--col-entrepreneurship)', pocs: [{ name: 'Iqra Siddiqui', phone: '7003116575' }, { name: 'Anushka Das', phone: '8584909707' }] },
+  { id: 'nss',              name: 'NSS',           icon: 'fa-hand-holding-heart', color: 'var(--col-nss)', pocs: [{ name: 'Prantika Saha', phone: '9123379762' }, { name: 'Md Shazeb Khan', phone: '8420894818' }] },
+  { id: 'photography',      name: 'PHOTOGRAPHY',   icon: 'fa-camera',           color: 'var(--col-photography)', pocs: [{ name: 'Tanisa Saha', phone: '9609800991' }, { name: 'Ayushman Bag', phone: '6291037683' }, { name: 'Namrta Gupta', phone: '8017534740' }] },
+  { id: 'sports',           name: 'SPORTS',        icon: 'fa-volleyball',       color: 'var(--col-sports)', pocs: [{ name: 'Sahil Sharma', phone: '8981028887' }] },
+  { id: 'tech',             name: 'TECH',          icon: 'fa-laptop-code',      color: 'var(--col-tech)', pocs: [{ name: 'Sidrah Rashid', phone: '8334962027' }, { name: 'Ayushmita Baidya', phone: '6289206386' }] },
+  { id: 'theatre',          name: 'THEATRE',       icon: 'fa-face-laugh-beam',  color: 'var(--col-theatre)', pocs: [{ name: 'Ritika Jaiswal', phone: '8240524737' }, { name: 'Susanta Das', phone: '9836952375' }] },
 ];
 
 /** @param {string} id */
@@ -223,6 +223,9 @@ const RAW_EVENTS = [
   { slug: 'mic-pe-mayhem',        name: 'MIC PE MAYHEM (RADIO DRAMA)', domain: 'theatre',         desc: 'An audio-only radio drama performance focusing on voice modulation and storytelling.',                                                                          fee: 300,  teamSize: '4 + 2 per college',                 date: '15 May', time: '11:00 AM', venue: 'Room P' },
   { slug: 'recreate-ya-regret',   name: 'RECREATE YA REGRET (BOLLYWOOD RECREATION)', domain: 'theatre', desc: 'Recreate iconic Bollywood scenes with creative, often hilarious, twists.',                                                                              fee: 300,  teamSize: '5 + 1 (1 team per college)',        date: '15 May', time: '11:00 AM', venue: 'New Auditorium' },
 ];
+
+// Sort events alphabetically
+RAW_EVENTS.sort((a, b) => a.name.localeCompare(b.name));
 
 // Attach form/rules URLs to every event
 RAW_EVENTS.forEach(ev => {

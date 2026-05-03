@@ -3,7 +3,7 @@ import { EVENTS, DOMAINS, getDomain } from './data.js';
 
 const DAYS = ['11 May', '12 May', '13 May', '14 May', '15 May'];
 let activeFilter = 'all';
-let activeDay    = '11 May';
+let activeDay = '11 May';
 
 // ─── Domain filter chips ──────────────────────────────────────────────────────
 function buildFilters() {
@@ -148,6 +148,13 @@ function eventTileHtml(ev, timeLabel) {
         ${timeLabel ? `<span><i class="fa-regular fa-clock"></i> ${timeLabel}</span>` : ''}
         <span><i class="fa-solid fa-location-dot"></i> ${ev.venue}</span>
       </span>
+      ${domain.pocs && domain.pocs.length > 0 ? `
+      <span class="tt-event-pocs" style="display:flex; flex-direction: column; gap: 3px; margin-top: 4px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06); width: 100%;">
+        ${domain.pocs.map(poc => `
+          <span style="font-size: 0.65rem; color: rgba(255,255,255,0.6); text-align: left; font-family: var(--font-body); letter-spacing: 0.02em;"><i class="fa-solid fa-phone" style="font-size: 0.8em; margin-right: 4px; color: var(--accent-color);"></i> ${poc.name}: ${poc.phone}</span>
+        `).join('')}
+      </span>
+      ` : ''}
     </button>
   `;
 }
@@ -193,7 +200,7 @@ function buildTimetable() {
 
   hours.forEach(h => {
     const entries = byHour.get(h).sort((a, b) => a.t.mins - b.t.mins);
-    const label   = formatHour(h);
+    const label = formatHour(h);
     const [main, sub] = label.split(' ');
     html += `
       <div class="tt-block">
@@ -213,11 +220,11 @@ function buildTimetable() {
 
 // ─── Modal ────────────────────────────────────────────────────────────────────
 function openModal(slug) {
-  const ev     = EVENTS.find(e => e.slug === slug);
+  const ev = EVENTS.find(e => e.slug === slug);
   if (!ev) return;
   const domain = getDomain(ev.domain);
   const backdrop = document.getElementById('eventModal');
-  const content  = document.getElementById('eventModalContent');
+  const content = document.getElementById('eventModalContent');
 
   content.style.setProperty('--accent-color', domain.color);
   content.innerHTML = `
@@ -233,6 +240,19 @@ function openModal(slug) {
       <div class="modal-meta-item"><div class="modal-meta-label">Entry Fee</div><div class="modal-meta-value">&#8377;${ev.fee}</div></div>
       <div class="modal-meta-item"><div class="modal-meta-label">Status</div><div class="modal-meta-value" style="color:var(--accent-gold);">Open</div></div>
     </div>
+    ${domain.pocs && domain.pocs.length > 0 ? `
+    <div class="modal-pocs" style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+      <div style="font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">Point of Contact</div>
+      ${domain.pocs.map((poc, index) => `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: ${index === domain.pocs.length - 1 ? '0' : '0.5rem'};">
+          <span style="color: #fff; font-weight: 500;">${poc.name}</span>
+          <a href="tel:${poc.phone}" style="color: var(--accent-color); text-decoration: none; font-variant-numeric: tabular-nums;">
+            <i class="fa-solid fa-phone" style="margin-right: 4px; font-size: 0.8em;"></i> ${poc.phone}
+          </a>
+        </div>
+      `).join('')}
+    </div>
+    ` : ''}
     <div class="modal-actions">
       <a class="btn btn-primary" href="${ev.formUrl}" target="_blank" rel="noopener">
         <i class="fa-solid fa-flag-checkered"></i> Register Now
