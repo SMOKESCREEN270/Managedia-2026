@@ -69,7 +69,7 @@ function buildEventsGrid() {
         const { slug, action } = btn.dataset;
         const ev = EVENTS.find(x => x.slug === slug);
         if (!ev) return;
-        if (action === 'register') window.open(ev.formUrl, '_blank', 'noopener');
+        if (action === 'register') window.open(ev.formUrl, '_self');
         else openModal(slug);
         return;
       }
@@ -261,7 +261,7 @@ function openModal(slug) {
     </div>
     ` : ''}
     <div class="modal-actions">
-      <a class="btn btn-primary" href="${ev.formUrl}" target="_blank" rel="noopener">
+      <a class="btn btn-primary" href="${ev.formUrl}" target="_self">
         <i class="fa-solid fa-flag-checkered"></i> Register Now
       </a>
       <a class="btn btn-ghost" href="${ev.rulesUrl}" target="_blank" rel="noopener">
