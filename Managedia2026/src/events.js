@@ -1,9 +1,9 @@
 import { init } from './shared.js';
 import { EVENTS, DOMAINS, getDomain } from './data.js';
 
-const DAYS = ['11 May', '12 May', '13 May', '14 May', '15 May'];
+const DAYS = ['1 June', '2 June', '3 June', '4 June', '5 June'];
 let activeFilter = 'all';
-let activeDay = '11 May';
+let activeDay = '1 June';
 
 // ─── Domain filter chips ──────────────────────────────────────────────────────
 function buildFilters() {
@@ -20,13 +20,16 @@ function buildFilters() {
     </button>
   `).join('');
 
-  container.addEventListener('click', e => {
-    const chip = e.target.closest('.filter-chip');
-    if (!chip) return;
-    activeFilter = chip.dataset.filter;
-    buildFilters();
-    buildEventsGrid();
-  });
+  if (!container._listenerAttached) {
+    container.addEventListener('click', e => {
+      const chip = e.target.closest('.filter-chip');
+      if (!chip) return;
+      activeFilter = chip.dataset.filter;
+      buildFilters();
+      buildEventsGrid();
+    });
+    container._listenerAttached = true;
+  }
 }
 
 // ─── Events grid ─────────────────────────────────────────────────────────────
@@ -58,22 +61,26 @@ function buildEventsGrid() {
     `;
   }).join('');
 
-  grid.querySelectorAll('.event-tile').forEach(tile => {
-    tile.addEventListener('click', e => {
-      if (!e.target.closest('.event-tile-btn')) openModal(tile.dataset.slug);
-    });
-  });
+  if (!grid._listenerAttached) {
+    grid.addEventListener('click', e => {
+      const btn = e.target.closest('.event-tile-btn');
+      if (btn) {
+        e.stopPropagation();
+        const { slug, action } = btn.dataset;
+        const ev = EVENTS.find(x => x.slug === slug);
+        if (!ev) return;
+        if (action === 'register') window.open(ev.formUrl, '_blank', 'noopener');
+        else openModal(slug);
+        return;
+      }
 
-  grid.querySelectorAll('.event-tile-btn').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      const { slug, action } = btn.dataset;
-      const ev = EVENTS.find(x => x.slug === slug);
-      if (!ev) return;
-      if (action === 'register') window.open(ev.formUrl, '_blank', 'noopener');
-      else openModal(slug);
+      const tile = e.target.closest('.event-tile');
+      if (tile) {
+        openModal(tile.dataset.slug);
+      }
     });
-  });
+    grid._listenerAttached = true;
+  }
 }
 
 // ─── Day tabs ─────────────────────────────────────────────────────────────────
@@ -89,7 +96,7 @@ function renderDayTabs() {
               aria-label="Day ${i + 1}, ${day}, ${count} events">
         <span class="day-card-label">DAY</span>
         <span class="day-card-num">${i + 1}</span>
-        <span class="day-card-date">${d} MAY</span>
+        <span class="day-card-date">${d} JUNE</span>
         <span class="day-card-count">${count} events</span>
       </button>
     `;
