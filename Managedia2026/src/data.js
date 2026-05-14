@@ -78,7 +78,83 @@ export const NAV_LINKS = [
 ];
 
 // ─── Form URLs ───────────────────────────────────────────────────────────────
-const EVENT_LINKS = {};
+const culturalFormUrl = 'https://forms.gle/DQa5Tr1k6SgWdp8A9';
+const sportsFormUrl = 'https://forms.gle/ALERbPvCv5XbLvMo9';
+const mainFormUrl = 'https://forms.gle/djHbtepRD2ENt3iVA';
+
+const EVENT_LINKS = {
+  // Cultural & Theatre
+  'duet-dance': { formUrl: culturalFormUrl },
+  'eastern-solo-singing': { formUrl: culturalFormUrl },
+  'western-solo-singing': { formUrl: culturalFormUrl },
+  'eastern-solo-dance': { formUrl: culturalFormUrl },
+  'western-solo-dance': { formUrl: culturalFormUrl },
+  'battle-of-bands': { formUrl: culturalFormUrl },
+  'war-of-rappers': { formUrl: culturalFormUrl },
+  'eastern-group-dance': { formUrl: culturalFormUrl },
+  'western-group-dance': { formUrl: culturalFormUrl },
+  'mr-and-ms-managedia': { formUrl: culturalFormUrl },
+  'fashion-show': { formUrl: culturalFormUrl },
+  'street-battle': { formUrl: culturalFormUrl },
+  'duoact': { formUrl: culturalFormUrl },
+  'curtains-and-consequences': { formUrl: culturalFormUrl },
+  'mic-pe-mayhem': { formUrl: culturalFormUrl },
+  'recreate-ya-regret': { formUrl: culturalFormUrl },
+
+  // Sports
+  'chess': { formUrl: sportsFormUrl },
+  'cricket': { formUrl: sportsFormUrl },
+  'fitness-mania': { formUrl: sportsFormUrl },
+  'tug-of-war': { formUrl: sportsFormUrl },
+  'throwball': { formUrl: sportsFormUrl },
+  'football': { formUrl: sportsFormUrl },
+
+  // Main Events
+  'mega-cosplay': { formUrl: mainFormUrl },
+  'art-installation': { formUrl: mainFormUrl },
+  'digital-art': { formUrl: mainFormUrl },
+  'makeover-challenge': { formUrl: mainFormUrl },
+  'face-painting': { formUrl: mainFormUrl },
+  'brand-roulette': { formUrl: mainFormUrl },
+  'the-panic-room': { formUrl: mainFormUrl },
+  'crisis-capital': { formUrl: mainFormUrl },
+  'miles-and-minds': { formUrl: mainFormUrl },
+  'ideathon': { formUrl: mainFormUrl },
+  'raise-it-up': { formUrl: mainFormUrl },
+  'domin8': { formUrl: mainFormUrl },
+  'brandstorm': { formUrl: mainFormUrl },
+  'podwars': { formUrl: mainFormUrl },
+  'lights-camera-quiz': { formUrl: mainFormUrl },
+  'viralverse': { formUrl: mainFormUrl },
+  'vibe-check': { formUrl: mainFormUrl },
+  'adfusion': { formUrl: mainFormUrl },
+  'devils-advocate': { formUrl: mainFormUrl },
+  'endgame': { formUrl: mainFormUrl },
+  'whiplash': { formUrl: mainFormUrl },
+  'between-realms': { formUrl: mainFormUrl },
+  'volte-face': { formUrl: mainFormUrl },
+  'abstract-photo-hunt': { formUrl: mainFormUrl },
+  'one-frame-one-truth': { formUrl: mainFormUrl },
+  'photojournalism': { formUrl: mainFormUrl },
+  'photo-relay': { formUrl: mainFormUrl },
+  'reel-making': { formUrl: mainFormUrl },
+  'one-minute-short-film': { formUrl: mainFormUrl },
+  'adverse': { formUrl: mainFormUrl },
+  'eco-artistry': { formUrl: mainFormUrl },
+  'non-fire-cooking': { formUrl: mainFormUrl },
+  'social-awareness-ad': { formUrl: mainFormUrl },
+  '60-seconds-spark': { formUrl: mainFormUrl },
+  'mime-for-a-cause': { formUrl: mainFormUrl },
+  'promptbattle-royale': { formUrl: mainFormUrl },
+  'quiz-carnage': { formUrl: mainFormUrl },
+  'webwiz-ai': { formUrl: mainFormUrl },
+  'code-blackout': { formUrl: mainFormUrl },
+  'bgmi': { formUrl: mainFormUrl },
+  'valorant': { formUrl: mainFormUrl },
+  'mortal-kombat-1': { formUrl: mainFormUrl },
+  'e-football': { formUrl: mainFormUrl },
+  'fc26-pc': { formUrl: mainFormUrl },
+};
 
 // ─── Events ──────────────────────────────────────────────────────────────────
 const RAW_EVENTS = [
@@ -103,7 +179,7 @@ const RAW_EVENTS = [
   { slug: 'devils-advocate',      name: "DEVIL'S ADVOCATE (CHARACTER BIOPSY)", domain: 'literary', desc: 'Reimagine a villain as a hero through a structured and persuasive written defense.',                                                                          fee: 0,    teamSize: 'Solo',                              date: '1 June', time: '12:00 PM', venue: 'Room O' },
   { slug: 'endgame',              name: 'ENDGAME (ALTERNATE ENDING)', domain: 'literary',        desc: 'Creatively rewrite the ending of a given movie or story segment in your own voice.',                                                                             fee: 0,    teamSize: 'Solo',                              date: '2 June', time: '10:00 AM', venue: 'Room P' },
   { slug: 'whiplash',             name: 'WHIPLASH (WRITING WITH A TWIST)', domain: 'literary',   desc: 'A dynamic writing challenge where the narrative must adapt mid-way to unexpected twists.',                                                                        fee: 0,    teamSize: 'Solo',                              date: '2 June', time: '12:00 PM', venue: 'Room J' },
-  { slug: 'between-realms',       name: 'BETWEEN REALMS (POETRY IN PAIRS)', domain: 'literary',  desc: 'Pairs compose and present contrasting poems based on opposing themes or perspectives.',                                                                          fee: 0,    teamSize: 'Solo',                              date: '2 June', time: '2:30 PM',  venue: 'Room H' },
+  { slug: 'between-realms',       name: 'BETWEEN REALMS (POETRY)',   domain: 'literary',  desc: 'Participants compose and present contrasting poems based on opposing themes or perspectives.',                                                                   fee: 0,    teamSize: 'Solo',                              date: '2 June', time: '2:30 PM',  venue: 'Room H' },
   { slug: 'volte-face',           name: 'VOLTE-FACE (TURNCOAT DEBATE)', domain: 'literary',      desc: 'A debate format where speakers must switch sides mid-speech, testing adaptability and argument strength.',                                                        fee: 0,    teamSize: 'Solo',                              date: '3 June', time: '12:00 PM', venue: 'BNI Hall' },
   { slug: 'abstract-photo-hunt',  name: 'ABSTRACT PHOTO HUNT',       domain: 'photography',     desc: 'A multi-day photography challenge where participants capture abstract interpretations of given themes.',                                                            fee: 0,    teamSize: '1–3',                               date: '5 June', time: '10:00 AM', venue: 'Room N (judging)' },
   { slug: 'one-frame-one-truth',  name: 'ONE FRAME, ONE TRUTH',       domain: 'photography',    desc: 'Submit a single powerful photograph that conveys emotion, reality, or a compelling story.',                                                                        fee: 0,    teamSize: '1–2',                               date: '5 June', time: '12:00 PM', venue: 'Room I (judging)' },
