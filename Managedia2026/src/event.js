@@ -51,6 +51,10 @@ function populatePage(ev) {
           <div class="modal-meta-label">Description</div>
           <div class="modal-meta-value" style="font-size:13px; line-height:1.5;">${ev.desc}</div>
         </div>
+        <div class="modal-meta-item">
+          <div class="modal-meta-label">Status</div>
+          <div class="modal-meta-value" style="color: ${ev.isClosed ? 'var(--accent-red)' : 'var(--accent-gold)'};">${ev.isClosed ? 'Seats Full' : 'Open'}</div>
+        </div>
       </div>
     `;
   }
@@ -70,13 +74,17 @@ function populatePage(ev) {
   }
 
   if (registerBtn) {
-    registerBtn.href = ev.formUrl;
-    if (isPlaceholderUrl(ev.formUrl)) {
-      registerBtn.classList.add('placeholder');
-      registerBtn.addEventListener('click', e => {
-        e.preventDefault();
-        alert(`Registration form not configured yet for this event.\n\nAdd it in src/data.js → EVENT_LINKS:\n  "${ev.slug}": { formUrl: "https://docs.google.com/forms/d/e/.../viewform" }`);
-      });
+    if (ev.isClosed) {
+      registerBtn.style.display = 'none';
+    } else {
+      registerBtn.href = ev.formUrl;
+      if (isPlaceholderUrl(ev.formUrl)) {
+        registerBtn.classList.add('placeholder');
+        registerBtn.addEventListener('click', e => {
+          e.preventDefault();
+          alert(`Registration form not configured yet for this event.\n\nAdd it in src/data.js → EVENT_LINKS:\n  "${ev.slug}": { formUrl: "https://docs.google.com/forms/d/e/.../viewform" }`);
+        });
+      }
     }
   }
 }

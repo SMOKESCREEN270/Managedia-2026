@@ -50,9 +50,15 @@ function buildEventsGrid() {
           <span><i class="fa-regular fa-clock"></i> ${ev.time}</span>
         </div>
         <div class="event-tile-actions">
+          ${ev.isClosed ? `
+          <button class="event-tile-btn primary" style="opacity: 0.5; cursor: not-allowed;" disabled>
+            <i class="fa-solid fa-ban"></i> Seats Full
+          </button>
+          ` : `
           <button class="event-tile-btn primary" data-action="register" data-slug="${ev.slug}">
             <i class="fa-solid fa-flag-checkered"></i> Register
           </button>
+          `}
           <button class="event-tile-btn ghost" data-action="rules" data-slug="${ev.slug}">
             <i class="fa-solid fa-circle-info"></i> Details
           </button>
@@ -245,7 +251,7 @@ function openModal(slug) {
       <div class="modal-meta-item"><div class="modal-meta-label">Venue</div><div class="modal-meta-value">${ev.venue}</div></div>
       <div class="modal-meta-item"><div class="modal-meta-label">Team Size</div><div class="modal-meta-value">${ev.teamSize}</div></div>
       <div class="modal-meta-item"><div class="modal-meta-label">Entry Fee</div><div class="modal-meta-value">&#8377;${ev.fee}</div></div>
-      <div class="modal-meta-item"><div class="modal-meta-label">Status</div><div class="modal-meta-value" style="color:var(--accent-gold);">Open</div></div>
+      <div class="modal-meta-item"><div class="modal-meta-label">Status</div><div class="modal-meta-value" style="color:${ev.isClosed ? 'var(--accent-red)' : 'var(--accent-gold)'};">${ev.isClosed ? 'Seats Full' : 'Open'}</div></div>
     </div>
     ${domain.pocs && domain.pocs.length > 0 ? `
     <div class="modal-pocs" style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
@@ -261,9 +267,11 @@ function openModal(slug) {
     </div>
     ` : ''}
     <div class="modal-actions">
+      ${ev.isClosed ? '' : `
       <a class="btn btn-primary" href="${ev.formUrl}" target="_self">
         <i class="fa-solid fa-flag-checkered"></i> Register Now
       </a>
+      `}
       <a class="btn btn-ghost" href="${ev.rulesUrl}" target="_blank" rel="noopener">
         <i class="fa-solid fa-book"></i> Rules &amp; R.
       </a>
